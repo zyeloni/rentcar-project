@@ -24,5 +24,17 @@ namespace RentCarDesktopApp
         {
             InitializeComponent();
         }
+
+        private void TextLogo_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton != MouseButtonState.Pressed) return;
+            
+            DragMove();
+        }
+
+        private void CloseButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
     }
 }

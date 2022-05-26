@@ -2,8 +2,33 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:RentCarDesktopApp"
+             xmlns:viewModel="clr-namespace:RentCarDesktopApp.Src.ViewModel"
+             xmlns:view="clr-namespace:RentCarDesktopApp.Src.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/Templates/MenuButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/Templates/SearchBoxTheme.xaml" />
+                <ResourceDictionary Source="Theme/Templates/CloseButtonTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate DataType="{x:Type viewModel:CarViewModel}">
+                <view:CarView></view:CarView>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:ContractorsViewModel}">
+                <view:ContractorsView></view:ContractorsView>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:RentsViewModel}">
+                <view:RentsView></view:RentsView>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:ReservationsViewModel}">
+                <view:ReservationsView></view:ReservationsView>
+            </DataTemplate>
+            
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -4,9 +4,102 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RentCarDesktopApp"
+        xmlns:viewModel="clr-namespace:RentCarDesktopApp.Src.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" 
+        Height="600" 
+        Width="1000"
+        MinHeight="600"
+        MinWidth="1000"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        Background="Transparent"
+        AllowsTransparency="True">
 
-    </Grid>
+    <Window.DataContext>
+        <viewModel:MainViewModel></viewModel:MainViewModel>
+    </Window.DataContext>
+
+    <Border Background="#272537"
+            CornerRadius="20 20, 0, 0">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="TextLogo"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Foreground="White"
+                       FontSize="26"
+                       Margin="25,20,0,0"
+                       Text="RentCar"
+                       MouseDown="TextLogo_OnMouseDown" />
+
+            <!-- Menu -->
+            <StackPanel Grid.Row="1" Grid.Column="0">
+
+                <RadioButton Content="Samochody"
+                             Height="60"
+                             FontSize="16"
+                             Foreground="White"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding CarViewCommand}" />
+
+                <RadioButton Content="Kontrahenci"
+                             Height="60"
+                             FontSize="16"
+                             Foreground="White"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ContractorsViewCommand}" />
+
+                <RadioButton Content="Wypożyczenia"
+                             Height="60"
+                             FontSize="16"
+                             Foreground="White"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding RentsViewCommand}" />
+
+                <RadioButton Content="Rezerwacje"
+                             Height="60"
+                             FontSize="16"
+                             Foreground="White"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ReservationsViewCommand}" />
+
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Width="250"
+                         Height="40"
+                         VerticalContentAlignment="Center"
+                         HorizontalAlignment="Left"
+                         Style="{StaticResource SearchBoxTheme}" />
+                <Button x:Name="CloseButton"
+                        Content="C"
+                        Grid.Column="2"
+                        Style="{StaticResource CloseButtonTheme}"
+                        Click="CloseButton_OnClick" />
+
+            </Grid>
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentView }" />
+        </Grid>
+    </Border>
 </Window>

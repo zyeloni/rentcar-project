@@ -7,4 +7,10 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Src\Model" />
+      <Folder Include="Images" />
+      <Folder Include="Theme\Animations" />
+    </ItemGroup>
+
 </Project>
