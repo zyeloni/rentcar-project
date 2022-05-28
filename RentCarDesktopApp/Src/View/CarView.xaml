@@ -4,10 +4,39 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:RentCarDesktopApp.Src.View"
+             xmlns:conventers="clr-namespace:RentCarDesktopApp.Conventers"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <conventers:OnlyYearConventer x:Key="OnlyYearConventer"/>
+    </UserControl.Resources>
+    
     <Grid>
-        <TextBlock Text="CarView"></TextBlock>
-        <DataGrid BorderThickness="0" Background="Transparent"></DataGrid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal">
+            <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Dodaj" Width="100"/>
+            <Button Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="Edytuj" Width="100"/>
+            <Button Background="Crimson" BorderBrush="Crimson" Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="Usuń" Width="100"/>
+        </StackPanel>
+        
+        <ListView Grid.Row="1" Style="{StaticResource MaterialDesignListView}" 
+                  x:Name="CarsGrid" 
+                  BorderThickness="0" Padding="5"
+                  ItemsSource="{Binding Cars, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedCar, Mode=TwoWay}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" Width="80" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Brand}" Header="Marka" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Model}" Header="Model" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Year, Converter={StaticResource OnlyYearConventer}}" Header="Rok" Width="100" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

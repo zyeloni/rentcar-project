@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RentCarDesktopApp"
         xmlns:viewModel="clr-namespace:RentCarDesktopApp.Src.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        Height="600" 
+        Title="MainWindow"
+        Height="600"
         Width="1000"
         MinHeight="600"
         MinWidth="1000"
@@ -15,7 +14,7 @@
         ResizeMode="CanResizeWithGrip"
         Background="Transparent"
         AllowsTransparency="True">
-
+    
     <Window.DataContext>
         <viewModel:MainViewModel></viewModel:MainViewModel>
     </Window.DataContext>
@@ -80,7 +79,9 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <TextBox Width="250"
@@ -88,9 +89,19 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Left"
                          Style="{StaticResource SearchBoxTheme}" />
-                <Button x:Name="CloseButton"
-                        Content="C"
+
+                <Button x:Name="MinimizedButton"
                         Grid.Column="2"
+                        Style="{StaticResource MinimizedButtonTheme}"
+                        Click="MinimizedButton_OnClick" />
+
+                <Button x:Name="MaximizedButton"
+                        Grid.Column="3"
+                        Style="{StaticResource MaximizedButtonTheme}"
+                        Click="MaximizedButton_OnClick" />
+
+                <Button x:Name="CloseButton"
+                        Grid.Column="4"
                         Style="{StaticResource CloseButtonTheme}"
                         Click="CloseButton_OnClick" />
 

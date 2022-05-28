@@ -11,24 +11,32 @@
                 <ResourceDictionary Source="Theme/Templates/MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/Templates/SearchBoxTheme.xaml" />
                 <ResourceDictionary Source="Theme/Templates/CloseButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/Templates/MaximizedButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/Templates/MinimizedButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/Templates/DarkDataGridTheme.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
             <DataTemplate DataType="{x:Type viewModel:CarViewModel}">
                 <view:CarView></view:CarView>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewModel:ContractorsViewModel}">
                 <view:ContractorsView></view:ContractorsView>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewModel:RentsViewModel}">
                 <view:RentsView></view:RentsView>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewModel:ReservationsViewModel}">
                 <view:ReservationsView></view:ReservationsView>
             </DataTemplate>
-            
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

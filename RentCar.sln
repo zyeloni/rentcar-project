@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCarDesktopApp", "RentCarDesktopApp\RentCarDesktopApp.csproj", "{155D41F3-1DF2-44BF-BA88-80E3C499357D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCarApi", "RentCarApi\RentCarApi.csproj", "{C7115642-9CF5-4E37-8678-8C1B37733F69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{155D41F3-1DF2-44BF-BA88-80E3C499357D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{155D41F3-1DF2-44BF-BA88-80E3C499357D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{155D41F3-1DF2-44BF-BA88-80E3C499357D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7115642-9CF5-4E37-8678-8C1B37733F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7115642-9CF5-4E37-8678-8C1B37733F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7115642-9CF5-4E37-8678-8C1B37733F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7115642-9CF5-4E37-8678-8C1B37733F69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

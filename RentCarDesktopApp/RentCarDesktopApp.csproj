@@ -8,9 +8,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Src\Model" />
       <Folder Include="Images" />
       <Folder Include="Theme\Animations" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+      <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.8" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
 </Project>
