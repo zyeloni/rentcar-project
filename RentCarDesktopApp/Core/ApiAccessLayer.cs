@@ -18,7 +18,7 @@ public class ApiAccessLayer<T> where T : IModel
 
     public async Task<IEnumerable<T>> GetAll()
     {
-        using (HttpResponseMessage responseMessage = await ApiClient.HttpClient.GetAsync(_Endpoint))
+        using (HttpResponseMessage responseMessage = await ApiClient.HttpClient.GetAsync(_Endpoint + "/Get"))
         {
             if (!responseMessage.IsSuccessStatusCode)
                 throw new Exception("Http Error Status Code | "
@@ -34,12 +34,11 @@ public class ApiAccessLayer<T> where T : IModel
     public async Task<IEnumerable<T>> Delete(T t)
     {
         var uriBuilder = new UriBuilder(_Endpoint + "/Delete");
-        uriBuilder.Port = -1;
         var query = HttpUtility.ParseQueryString(uriBuilder.Query);
         query["Id"] = t.Id.ToString();
         uriBuilder.Query = query.ToString();
         string Endpoint = uriBuilder.ToString();
-        
+
         using (HttpResponseMessage responseMessage = await ApiClient.HttpClient.GetAsync(Endpoint))
         {
             if (!responseMessage.IsSuccessStatusCode)

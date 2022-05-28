@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows;
 using RentCarDesktopApp.Core;
 using RentCarDesktopApp.Model;
 using RentCarDesktopApp.Services;
@@ -10,9 +11,12 @@ public class CarViewModel : ObservableObject
 {
     private CarService _carService;
     public Task Initialization { get; private set; }
+    public Task DeleteCarTask { get; private set; }
 
     private IEnumerable<Car> _cars;
     private Car _selectedCar;
+
+    public RelayCommand DeleteCommand { get; set; }
 
     public IEnumerable<Car> Cars
     {
@@ -38,11 +42,25 @@ public class CarViewModel : ObservableObject
     {
         _carService = new CarService();
         Initialization = LoadCars();
+
+        DeleteCommand = new RelayCommand(ob => { DeleteCarTask = DeleteCars(); }, CanDeleteCar);
     }
 
     private async Task LoadCars()
     {
         Cars = await _carService.GetAll();
         OnPropertyChanged(nameof(Cars));
+    }
+
+    private async Task DeleteCars()
+    {
+        await _carService.Delete(SelectedCar);
+        await LoadCars();
+        OnPropertyChanged(nameof(Cars));
+    }
+
+    private bool CanDeleteCar(object car)
+    {
+        return SelectedCar != null;
     }
 }

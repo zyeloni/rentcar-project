@@ -7,13 +7,13 @@ namespace RentCarApi.Controllers;
 [Route("[controller]")]
 public class CarController : Controller
 {
-    [HttpGet("~/Get")]
+    [HttpGet("Get")]
     public IEnumerable<Car> Get()
     {
         return Data.Cars;
     }
 
-    [HttpGet("~/Delete")]
+    [HttpGet("Delete")]
     public IEnumerable<Car> Delete(int Id)
     {
         List<Car> removed = Data.Cars.Where(x => x.Id == Id).ToList();

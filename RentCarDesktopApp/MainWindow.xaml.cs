@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RentCarDesktopApp.Core;
+using RentCarDesktopApp.Model;
+using RentCarDesktopApp.Windows;
 
 namespace RentCarDesktopApp
 {
@@ -25,6 +27,10 @@ namespace RentCarDesktopApp
         {
             InitializeComponent();
             ApiClient.InitializeClient();
+
+            SaveCarWindow save = new SaveCarWindow();
+            save.Init(new Car(){Brand = "Opel", Model = "Meriva"});
+            save.Show();
         }
 
         private void TextLogo_OnMouseDown(object sender, MouseButtonEventArgs e)
