@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 using RentCarDesktopApp.Core;
 using RentCarDesktopApp.Model;
 using RentCarDesktopApp.Services;
+using RentCarDesktopApp.Windows;
 
 namespace RentCarDesktopApp.Src.ViewModel;
 
@@ -17,6 +21,8 @@ public class CarViewModel : ObservableObject
     private Car _selectedCar;
 
     public RelayCommand DeleteCommand { get; set; }
+    public RelayCommand AddCommand { get; set; }
+    public RelayCommand EditCommand { get; set; }
 
     public IEnumerable<Car> Cars
     {
@@ -43,7 +49,9 @@ public class CarViewModel : ObservableObject
         _carService = new CarService();
         Initialization = LoadCars();
 
-        DeleteCommand = new RelayCommand(ob => { DeleteCarTask = DeleteCars(); }, CanDeleteCar);
+        DeleteCommand = new RelayCommand(ob => { DeleteCarTask = DeleteCars(); }, IsSelected);
+        AddCommand = new RelayCommand(ob => { ShowAddModal(); });
+        EditCommand = new RelayCommand(ob => { ShowEditModal(); }, IsSelected);
     }
 
     private async Task LoadCars()
@@ -57,10 +65,32 @@ public class CarViewModel : ObservableObject
         await _carService.Delete(SelectedCar);
         await LoadCars();
         OnPropertyChanged(nameof(Cars));
+        SelectedCar = null;
     }
 
-    private bool CanDeleteCar(object car)
+    private bool IsSelected(object car)
     {
         return SelectedCar != null;
+    }
+
+    private void ShowAddModal()
+    {
+        SaveCarWindow save = new SaveCarWindow();
+        save.Init();
+        save.Show();
+        save.Closing += OnSaveClose;
+    }
+
+    private void ShowEditModal()
+    {
+        SaveCarWindow save = new SaveCarWindow();
+        save.Init(SelectedCar);
+        save.Show();
+        save.Closed += OnSaveClose;
+    }
+
+    private void OnSaveClose(object? sender, EventArgs eventArgs)
+    {
+        Initialization = LoadCars();
     }
 }

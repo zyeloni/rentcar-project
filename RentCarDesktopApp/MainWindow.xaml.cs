@@ -27,10 +27,6 @@ namespace RentCarDesktopApp
         {
             InitializeComponent();
             ApiClient.InitializeClient();
-
-            SaveCarWindow save = new SaveCarWindow();
-            save.Init(new Car(){Brand = "Opel", Model = "Meriva"});
-            save.Show();
         }
 
         private void TextLogo_OnMouseDown(object sender, MouseButtonEventArgs e)

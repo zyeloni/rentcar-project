@@ -21,4 +21,23 @@ public class CarController : Controller
 
         return removed;
     }
+
+
+    [HttpPost("Add")]
+    public Car Add(Car model)
+    {
+        int maxId = Data.Cars.Max(x => x.Id);
+        model.Id = maxId + 1;
+        Data.Cars.Add(model);
+        return model;
+    }
+
+    [HttpPost("Edit")]
+    public Car Edit(Car model)
+    {
+        var index = Data.Cars.FindIndex(c => c.Id == model.Id);
+        Data.Cars[index] = model;
+
+        return model;
+    }
 }

@@ -19,8 +19,8 @@
         </Grid.RowDefinitions>
         
         <StackPanel Orientation="Horizontal">
-            <Button Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Dodaj" Width="100"/>
-            <Button Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="Edytuj" Width="100"/>
+            <Button Command="{Binding AddCommand}" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Dodaj" Width="100"/>
+            <Button Command="{Binding EditCommand}" Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="Edytuj" Width="100"/>
             <Button Command="{Binding DeleteCommand}" Background="Crimson" BorderBrush="Crimson" Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="Usuń" Width="100"/>
         </StackPanel>
         
