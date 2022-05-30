@@ -6,7 +6,33 @@
              xmlns:local="clr-namespace:RentCarDesktopApp.Src.View"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    
     <Grid>
-        <TextBlock Text="ContractorsView"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding AddCommand}" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Dodaj" Width="100"/>
+            <Button Command="{Binding EditCommand}" Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="Edytuj" Width="100"/>
+            <Button Command="{Binding DeleteCommand}" Background="Crimson" BorderBrush="Crimson" Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="Usuń" Width="100"/>
+        </StackPanel>
+        
+        <ListView Grid.Row="1" Style="{StaticResource MaterialDesignListView}" 
+                  x:Name="CarsGrid" 
+                  BorderThickness="0" Padding="5"
+                  ItemsSource="{Binding Contractors, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedContractor, Mode=TwoWay}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" Width="80" />
+                    <GridViewColumn DisplayMemberBinding="{Binding FirstName}" Header="Imię" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding SurName}" Header="Nazwisko" Width="150" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
+    
+    
 </UserControl>

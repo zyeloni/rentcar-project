@@ -1,4 +1,5 @@
 ﻿using RentCarApi.Models;
+using RentCarDesktopApp.Model;
 
 namespace RentCarApi;
 
@@ -12,5 +13,10 @@ public class Data
         Year = DateTime.Now.AddDays(index),
     }).ToList();
     
-    
+    public static List<Contractor> Contractors = Enumerable.Range(1, 20).Select(index => new Contractor()
+    {
+        Id = index,
+        FirstName = "Imie " + index,
+        SurName = "Naziwsko  " + index,
+    }).ToList();
 }
