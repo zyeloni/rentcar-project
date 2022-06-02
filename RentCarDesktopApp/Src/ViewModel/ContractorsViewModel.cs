@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using RentCarDesktopApp.Core;
 using RentCarDesktopApp.Model;
 using RentCarDesktopApp.Services;
+using RentCarDesktopApp.Src.Windows;
 
 namespace RentCarDesktopApp.Src.ViewModel;
 
@@ -51,8 +54,7 @@ public class ContractorsViewModel : ObservableObject
 
     private async Task LoadContractors()
     {
-        Contractors = await _contractorService.GetAll();
-        OnPropertyChanged(nameof(Contractors));
+        Contractors = await _contractorService.GetAll();       
     }
 
     private bool IsSelected(object contractor)
@@ -62,19 +64,30 @@ public class ContractorsViewModel : ObservableObject
 
     private void ShowEditModal()
     {
-        throw new System.NotImplementedException();
+        SaveContractorWindow save = new SaveContractorWindow();
+        save.Init(SelectedContractor);
+        save.Show();
+        save.Closed += OnSaveClose;
     }
 
     private void ShowAddModal()
     {
-        throw new System.NotImplementedException();
+        SaveContractorWindow save = new SaveContractorWindow();
+        save.Init();
+        save.Show();
+        save.Closing += OnSaveClose;
+
+    }
+
+    private void OnSaveClose(object? sender, EventArgs e)
+    {
+        Initialization = LoadContractors();
     }
 
     private async Task DeleteContractor()
     {
         await _contractorService.Delete(SelectedContractor);
         await LoadContractors();
-        OnPropertyChanged(nameof(Contractors));
         SelectedContractor = null;
     }
 }

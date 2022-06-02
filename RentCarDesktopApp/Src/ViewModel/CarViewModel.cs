@@ -57,14 +57,12 @@ public class CarViewModel : ObservableObject
     private async Task LoadCars()
     {
         Cars = await _carService.GetAll();
-        OnPropertyChanged(nameof(Cars));
     }
 
     private async Task DeleteCars()
     {
         await _carService.Delete(SelectedCar);
         await LoadCars();
-        OnPropertyChanged(nameof(Cars));
         SelectedCar = null;
     }
 

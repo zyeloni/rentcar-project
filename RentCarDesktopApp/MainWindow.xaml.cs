@@ -26,7 +26,6 @@ namespace RentCarDesktopApp
         public MainWindow()
         {
             InitializeComponent();
-            ApiClient.InitializeClient();
         }
 
         private void TextLogo_OnMouseDown(object sender, MouseButtonEventArgs e)
