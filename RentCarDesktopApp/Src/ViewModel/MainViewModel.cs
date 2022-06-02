@@ -50,7 +50,7 @@ public class MainViewModel : ObservableObject
         
         ReservationsViewCommand = new RelayCommand(o =>
         {
-            CurrentView = _ReservationsViewModel;
+            CurrentView =_ReservationsViewModel;
         });
     }
 }

@@ -9,7 +9,7 @@ using RentCarDesktopApp.Src.Windows;
 
 namespace RentCarDesktopApp.Src.ViewModel;
 
-public class ContractorsViewModel : ObservableObject
+public class ContractorsViewModel : ObservableObject, IViewModel<Contractor>
 {
     private ContractorService _contractorService;
     public Task Initialization { get; private set; }
@@ -22,13 +22,13 @@ public class ContractorsViewModel : ObservableObject
     public RelayCommand AddCommand { get; set; }
     public RelayCommand EditCommand { get; set; }
 
-    public IEnumerable<Contractor> Contractors
+    public IEnumerable<Contractor> Items
     {
         get { return _contractors; }
         set
         {
             _contractors = value;
-            OnPropertyChanged(nameof(Contractors));
+            OnPropertyChanged(nameof(Items));
         }
     }
     
@@ -54,7 +54,7 @@ public class ContractorsViewModel : ObservableObject
 
     private async Task LoadContractors()
     {
-        Contractors = await _contractorService.GetAll();       
+        Items = await _contractorService.GetAll();       
     }
 
     private bool IsSelected(object contractor)
@@ -89,5 +89,10 @@ public class ContractorsViewModel : ObservableObject
         await _contractorService.Delete(SelectedContractor);
         await LoadContractors();
         SelectedContractor = null;
+    }
+
+    public void Search(string key)
+    {
+        throw new NotImplementedException();
     }
 }

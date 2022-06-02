@@ -11,7 +11,7 @@ using RentCarDesktopApp.Windows;
 
 namespace RentCarDesktopApp.Src.ViewModel;
 
-public class CarViewModel : ObservableObject
+public class CarViewModel : ObservableObject, IViewModel<Car>
 {
     private CarService _carService;
     public Task Initialization { get; private set; }
@@ -24,15 +24,17 @@ public class CarViewModel : ObservableObject
     public RelayCommand AddCommand { get; set; }
     public RelayCommand EditCommand { get; set; }
 
-    public IEnumerable<Car> Cars
+    public IEnumerable<Car> Items
     {
         get { return _cars; }
         set
         {
             _cars = value;
-            OnPropertyChanged(nameof(Cars));
+            OnPropertyChanged(nameof(Items));
         }
     }
+
+    private IEnumerable<Car> AllData { get; set; }
 
     public Car SelectedCar
     {
@@ -56,7 +58,8 @@ public class CarViewModel : ObservableObject
 
     private async Task LoadCars()
     {
-        Cars = await _carService.GetAll();
+        Items = await _carService.GetAll();
+        AllData = Items;
     }
 
     private async Task DeleteCars()
@@ -90,5 +93,10 @@ public class CarViewModel : ObservableObject
     private void OnSaveClose(object? sender, EventArgs eventArgs)
     {
         Initialization = LoadCars();
+    }
+
+    public void Search(string key)
+    {
+        var a = "";
     }
 }

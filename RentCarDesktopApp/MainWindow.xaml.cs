@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RentCarDesktopApp.Core;
 using RentCarDesktopApp.Model;
+using RentCarDesktopApp.Src.ViewModel;
 using RentCarDesktopApp.Windows;
 
 namespace RentCarDesktopApp
@@ -52,6 +53,22 @@ namespace RentCarDesktopApp
         private void MinimizedButton_OnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow!.WindowState = WindowState.Minimized;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var vm = (sender as FrameworkElement).DataContext;
+            
+           if(vm is MainViewModel)
+            {
+                var mainViewModel = (vm as MainViewModel);
+                string Text = (sender as TextBox).Text;
+               
+                if(mainViewModel.CurrentView is CarViewModel)
+                {
+                    (mainViewModel.CurrentView as CarViewModel).Search(Text);
+                }
+            }
         }
     }
 }

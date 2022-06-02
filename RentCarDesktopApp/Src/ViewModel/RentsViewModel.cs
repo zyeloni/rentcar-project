@@ -1,9 +1,14 @@
-﻿namespace RentCarDesktopApp.Src.ViewModel;
+﻿using RentCarDesktopApp.Model;
+using System.Collections.Generic;
 
-public class RentsViewModel
+namespace RentCarDesktopApp.Src.ViewModel;
+
+public class RentsViewModel : IViewModel<Car>
 {
-    public RentsViewModel()
+    public IEnumerable<Car> Items { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+    public void Search(string key)
     {
-        
+        throw new System.NotImplementedException();
     }
 }
