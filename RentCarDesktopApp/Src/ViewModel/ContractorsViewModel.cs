@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using RentCarDesktopApp.Core;
 using RentCarDesktopApp.Model;
 using RentCarDesktopApp.Services;
-using RentCarDesktopApp.Src.Windows;
+using RentCarDesktopApp.Windows;
 
 namespace RentCarDesktopApp.Src.ViewModel;
 
-public class ContractorsViewModel : ObservableObject, IViewModel<Contractor>
+public class ContractorsViewModel : ObservableObject, IViewModel
 {
     private ContractorService _contractorService;
     public Task Initialization { get; private set; }
@@ -31,6 +32,8 @@ public class ContractorsViewModel : ObservableObject, IViewModel<Contractor>
             OnPropertyChanged(nameof(Items));
         }
     }
+    
+    private IEnumerable<Contractor> AllData { get; set; }
     
     public Contractor SelectedContractor
     {
@@ -54,7 +57,8 @@ public class ContractorsViewModel : ObservableObject, IViewModel<Contractor>
 
     private async Task LoadContractors()
     {
-        Items = await _contractorService.GetAll();       
+        Items = await _contractorService.GetAll();
+        AllData = Items;
     }
 
     private bool IsSelected(object contractor)
@@ -91,8 +95,16 @@ public class ContractorsViewModel : ObservableObject, IViewModel<Contractor>
         SelectedContractor = null;
     }
 
-    public void Search(string key)
+    public void Search(string query)
     {
-        throw new NotImplementedException();
+        if (query.Equals(String.Empty))
+            Items = AllData;
+
+        Items = (Items as List<Contractor>).Where(x => x.FirstName.Contains(query) || x.SurName.Contains(query)).ToList();
+    }
+
+    public void ResetSearch()
+    {
+        Items = AllData;
     }
 }

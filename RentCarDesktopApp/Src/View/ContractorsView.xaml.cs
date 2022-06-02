@@ -8,6 +8,5 @@ public partial class ContractorsView : UserControl
     public ContractorsView()
     {
         InitializeComponent();
-        DataContext = new ContractorsViewModel();
     }
 }

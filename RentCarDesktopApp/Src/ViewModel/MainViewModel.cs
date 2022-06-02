@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using RentCarDesktopApp.Core;
 using RentCarDesktopApp.Src.View;
 
@@ -10,9 +11,8 @@ public class MainViewModel : ObservableObject
     public ContractorsViewModel _ContractorsViewModel;
     public RentsViewModel _RentsViewModel;
     public ReservationsViewModel _ReservationsViewModel;
-    
     private object _currentView;
-    
+
     public RelayCommand CarViewCommand { get; set; }
     public RelayCommand ContractorsViewCommand { get; set; }
     public RelayCommand RentsViewCommand { get; set; }
@@ -21,36 +21,51 @@ public class MainViewModel : ObservableObject
     public object CurrentView
     {
         get { return _currentView; }
-        set { _currentView = value; OnPropertyChanged(); }
+        set
+        {
+            ClearSearchQuery();
+            _currentView = value;
+            OnPropertyChanged();
+        }
     }
-    
+
+    private String _searchText;
+
+    public String SearchText
+    {
+        get { return _searchText; }
+        set
+        {
+            _searchText = value;
+            OnPropertyChanged(nameof(SearchText));
+        }
+    }
+
+    private void ClearSearchQuery()
+    {
+        if (CurrentView is IViewModel)
+        {
+            (CurrentView as IViewModel).ResetSearch();
+        }
+
+        SearchText = "";
+    }
+
     public MainViewModel()
     {
         _CarViewModel = new CarViewModel();
         _ContractorsViewModel = new ContractorsViewModel();
         _RentsViewModel = new RentsViewModel();
         _ReservationsViewModel = new ReservationsViewModel();
-        
+
         CurrentView = _CarViewModel;
 
-        CarViewCommand = new RelayCommand(o =>
-        {
-            CurrentView = _CarViewModel;
-        });
-        
-        ContractorsViewCommand = new RelayCommand(o =>
-        {
-            CurrentView = _ContractorsViewModel;
-        });
-        
-        RentsViewCommand = new RelayCommand(o =>
-        {
-            CurrentView = _RentsViewModel;
-        });
-        
-        ReservationsViewCommand = new RelayCommand(o =>
-        {
-            CurrentView =_ReservationsViewModel;
-        });
+        CarViewCommand = new RelayCommand(o => { CurrentView = _CarViewModel; });
+
+        ContractorsViewCommand = new RelayCommand(o => { CurrentView = _ContractorsViewModel; });
+
+        RentsViewCommand = new RelayCommand(o => { CurrentView = _RentsViewModel; });
+
+        ReservationsViewCommand = new RelayCommand(o => { CurrentView = _ReservationsViewModel; });
     }
 }

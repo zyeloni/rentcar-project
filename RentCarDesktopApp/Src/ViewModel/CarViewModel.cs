@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
@@ -11,7 +12,7 @@ using RentCarDesktopApp.Windows;
 
 namespace RentCarDesktopApp.Src.ViewModel;
 
-public class CarViewModel : ObservableObject, IViewModel<Car>
+public class CarViewModel : ObservableObject, IViewModel
 {
     private CarService _carService;
     public Task Initialization { get; private set; }
@@ -87,7 +88,8 @@ public class CarViewModel : ObservableObject, IViewModel<Car>
         SaveCarWindow save = new SaveCarWindow();
         save.Init(SelectedCar);
         save.Show();
-        save.Closed += OnSaveClose;
+        //save.Closed += OnSaveClose;
+        Items = new List<Car>();
     }
 
     private void OnSaveClose(object? sender, EventArgs eventArgs)
@@ -95,8 +97,16 @@ public class CarViewModel : ObservableObject, IViewModel<Car>
         Initialization = LoadCars();
     }
 
-    public void Search(string key)
+    public void Search(string query)
     {
-        var a = "";
+        if (query.Equals(String.Empty))
+            Items = AllData;
+
+        Items = (Items as List<Car>).Where(x => x.Brand.Contains(query) || x.Model.Contains(query)).ToList();
+    }
+
+    public void ResetSearch()
+    {
+        Items = AllData;
     }
 }

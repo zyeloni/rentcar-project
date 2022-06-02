@@ -32,7 +32,7 @@ namespace RentCarDesktopApp
         private void TextLogo_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton != MouseButtonState.Pressed) return;
-            
+
             DragMove();
         }
 
@@ -47,7 +47,6 @@ namespace RentCarDesktopApp
                 Application.Current.MainWindow.WindowState = WindowState.Normal;
             else
                 Application.Current.MainWindow.WindowState = WindowState.Maximized;
-
         }
 
         private void MinimizedButton_OnClick(object sender, RoutedEventArgs e)
@@ -58,15 +57,15 @@ namespace RentCarDesktopApp
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var vm = (sender as FrameworkElement).DataContext;
-            
-           if(vm is MainViewModel)
+
+            if (vm is MainViewModel)
             {
                 var mainViewModel = (vm as MainViewModel);
                 string Text = (sender as TextBox).Text;
-               
-                if(mainViewModel.CurrentView is CarViewModel)
+
+                if (mainViewModel.CurrentView is IViewModel)
                 {
-                    (mainViewModel.CurrentView as CarViewModel).Search(Text);
+                    (mainViewModel.CurrentView as IViewModel).Search(Text);
                 }
             }
         }

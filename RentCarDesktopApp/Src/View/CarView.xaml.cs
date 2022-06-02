@@ -15,6 +15,5 @@ public partial class CarView : UserControl
     public CarView()
     {
         InitializeComponent();
-        DataContext = new CarViewModel();
     }
 }
