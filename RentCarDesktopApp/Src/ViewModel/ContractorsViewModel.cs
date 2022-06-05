@@ -100,7 +100,7 @@ public class ContractorsViewModel : ObservableObject, IViewModel
         if (query.Equals(String.Empty))
             Items = AllData;
 
-        Items = (Items as List<Contractor>).Where(x => x.FirstName.Contains(query) || x.SurName.Contains(query)).ToList();
+        Items = (AllData as List<Contractor>).Where(x => x.FirstName.Contains(query) || x.SurName.Contains(query)).ToList();
     }
 
     public void ResetSearch()

@@ -22,7 +22,8 @@
             </Setter>
 
             <Setter Property="Background" Value="#272537" />
-            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderThickness" Value="3 0 0 0" />
+            <Setter Property="BorderBrush" Value="#272537"></Setter>
         </Style.Setters>
 
         <Style.Triggers>
@@ -33,7 +34,7 @@
                             <ColorAnimation To="#22202f"
                                             Storyboard.TargetProperty="(RadioButton.Background).(SolidColorBrush.Color)"
                                             FillBehavior="HoldEnd"
-                                            Duration="0:0:0.1" />
+                                            Duration="0:0:0.2" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -43,7 +44,7 @@
                             <ColorAnimation To="#272537"
                                             Storyboard.TargetProperty="(RadioButton.Background).(SolidColorBrush.Color)"
                                             FillBehavior="Stop"
-                                            Duration="0:0:0.1" />
+                                            Duration="0:0:0.2" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>

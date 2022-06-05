@@ -10,7 +10,6 @@ public class MainViewModel : ObservableObject
     public CarViewModel _CarViewModel;
     public ContractorsViewModel _ContractorsViewModel;
     public RentsViewModel _RentsViewModel;
-    public ReservationsViewModel _ReservationsViewModel;
     private object _currentView;
 
     public RelayCommand CarViewCommand { get; set; }
@@ -56,7 +55,6 @@ public class MainViewModel : ObservableObject
         _CarViewModel = new CarViewModel();
         _ContractorsViewModel = new ContractorsViewModel();
         _RentsViewModel = new RentsViewModel();
-        _ReservationsViewModel = new ReservationsViewModel();
 
         CurrentView = _CarViewModel;
 
@@ -65,7 +63,5 @@ public class MainViewModel : ObservableObject
         ContractorsViewCommand = new RelayCommand(o => { CurrentView = _ContractorsViewModel; });
 
         RentsViewCommand = new RelayCommand(o => { CurrentView = _RentsViewModel; });
-
-        ReservationsViewCommand = new RelayCommand(o => { CurrentView = _ReservationsViewModel; });
     }
 }

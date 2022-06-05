@@ -67,13 +67,6 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding RentsViewCommand}" />
 
-                <RadioButton Content="Rezerwacje"
-                             Height="60"
-                             FontSize="16"
-                             Foreground="White"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding ReservationsViewCommand}" />
-
             </StackPanel>
 
             <Grid Grid.Column="1">

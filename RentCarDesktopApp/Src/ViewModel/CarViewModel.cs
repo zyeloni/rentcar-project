@@ -88,8 +88,7 @@ public class CarViewModel : ObservableObject, IViewModel
         SaveCarWindow save = new SaveCarWindow();
         save.Init(SelectedCar);
         save.Show();
-        //save.Closed += OnSaveClose;
-        Items = new List<Car>();
+        save.Closed += OnSaveClose;
     }
 
     private void OnSaveClose(object? sender, EventArgs eventArgs)
@@ -102,7 +101,7 @@ public class CarViewModel : ObservableObject, IViewModel
         if (query.Equals(String.Empty))
             Items = AllData;
 
-        Items = (Items as List<Car>).Where(x => x.Brand.Contains(query) || x.Model.Contains(query)).ToList();
+        Items = (AllData as List<Car>).Where(x => x.Brand.Contains(query) || x.Model.Contains(query)).ToList();
     }
 
     public void ResetSearch()

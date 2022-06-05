@@ -4,9 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:RentCarDesktopApp.Src.View"
+             xmlns:conventers="clr-namespace:RentCarDesktopApp.Conventers"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <conventers:ContractorNameConventer x:Key="ContractorNameConventer"/>
+        <conventers:CarNameConventer x:Key="CarNameConventer"/>
+        <conventers:DateConventer x:Key="DateConventer"/>
+    </UserControl.Resources>
+    
     <Grid>
-        <TextBlock Text="RentView"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding AddCommand}" Style="{StaticResource MaterialDesignRaisedAccentButton}" Content="Dodaj" Width="100"/>
+            <Button Command="{Binding EditCommand}" Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="Edytuj" Width="100"/>
+            <Button Command="{Binding DeleteCommand}" Background="Crimson" BorderBrush="Crimson" Margin="20,0,0,0" Style="{StaticResource MaterialDesignRaisedDarkButton}" Content="Usuń" Width="100"/>
+        </StackPanel>
+        
+        <ListView Grid.Row="1" Style="{StaticResource MaterialDesignListView}" 
+                  x:Name="CarsGrid" 
+                  BorderThickness="0" Padding="5"
+                  ItemsSource="{Binding Items, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedRent, Mode=TwoWay}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" Width="80" />
+                    <GridViewColumn DisplayMemberBinding="{Binding DateStart, Converter={StaticResource DateConventer}}" Header="Od" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding DateEnd, Converter={StaticResource DateConventer}}" Header="Do" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Days}" Header="Ilość dni" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Contractor, Converter={StaticResource ContractorNameConventer}}" Header="Klient" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Car, Converter={StaticResource CarNameConventer}}" Header="Samochód"  />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>
